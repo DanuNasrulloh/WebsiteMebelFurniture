@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mebel Yun-Yun - Interior Design</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes zoomInOut {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Base Classes */
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 80vh;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: zoomInOut 15s infinite ease-in-out,
+                       floatAnimation 6s infinite ease-in-out;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3B82F6;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Stats */
+        .stats-container {
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: white;
+                transition: right 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-menu.active {
+                right: 0;
+            }
+
+            .hero-image {
+                height: 400px;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="menuBtn" class="fixed top-4 right-4 z-50 p-2 rounded-lg bg-white shadow-lg md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-4 bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-40">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center animate-slide-in">
+                <img src="../IMAGE/logo.png" alt="Mebel Yun-Yun Logo" class="h-10">
+                <span class="ml-2 text-xl font-bold">Mebel Yun-Yun</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 animate-fade-in">
+                <a href="#" class="nav-link text-gray-700">Home</a>
+                <a href="#" class="nav-link text-gray-700">About us</a>
+                <a href="#" class="nav-link text-gray-700">Gallery</a>
+                <a href="#" class="nav-link text-gray-700">Project</a>
+                <a href="#" class="nav-link text-gray-700">Blogs</a>
+                <a href="#" class="nav-link text-gray-700">Contact us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu z-40 p-6 pt-20 md:hidden">
+        <div class="flex flex-col space-y-6">
+            <a href="#" class="text-gray-700 text-lg">Home</a>
+            <a href="#" class="text-gray-700 text-lg">About us</a>
+            <a href="#" class="text-gray-700 text-lg">Gallery</a>
+            <a href="#" class="text-gray-700 text-lg">Project</a>
+            <a href="#" class="text-gray-700 text-lg">Blogs</a>
+            <a href="#" class="text-gray-700 text-lg">Contact us</a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 md:px-6 pt-24 pb-12">
+        <!-- Hero Section -->
+        <div class="hero-section rounded-3xl p-6 md:p-12 relative overflow-hidden shadow-2xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="max-w-xl animate-fade-in">
+                    <p class="text-brown-600 mb-4 text-sm md:text-base">WELCOME TO MEBEL YUN-YUN...</p>
+                    <h1 class="text-4xl md:text-5xl font-bold text-brown-800 mb-6">FIND YOUR PERFECT INTERIOR</h1>
+                    <p class="text-gray-600 mb-8">
+                        Transform your space into a masterpiece with our innovative designs and expert craftsmanship. 
+                        Discover the perfect blend of style and functionality.
+                    </p>
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <input type="email" placeholder="Enter your email" 
+                               class="px-6 py-3 rounded-full border border-gray-300 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                        <button class="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transform hover:scale-105 transition-all">
+                            Get a Free Consultation
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="../IMAGE/Design.png" 
+                         alt="Modern Interior Design" 
+                         class="hero-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-container mt-12 p-6 grid grid-cols-2 md:flex md:justify-around text-white animate-fade-in">
+            <div class="stat-card text-center p-4 m-2 rounded-xl">
+                <h3 class="text-2xl font-bold">40K+</h3>
+                <p>Happy Clients</p>
+            </div>
+            <div class="stat-card text-center p-4 m-2 rounded-xl">
+                <h3 class="text-2xl font-bold">20K+</h3>
+                <p>Projects Completed</p>
+            </div>
+            <div class="stat-card text-center p-4 m-2 rounded-xl">
+                <h3 class="text-2xl font-bold">15K+</h3>
+                <p>Design Awards</p>
+            </div>
+            <div class="stat-card text-center p-4 m-2 rounded-xl">
+                <h3 class="text-2xl font-bold">23K+</h3>
+                <p>Positive Reviews</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Animate stats on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
